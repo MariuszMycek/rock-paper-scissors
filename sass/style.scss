@@ -82,6 +82,7 @@ body {
     justify-content: center;
     align-items: center;
     .button {
+        height: 54px;
         cursor: default;
         &:hover {
             background-color: $bgcolor;
@@ -119,7 +120,9 @@ body {
 }
 .sys-messages__text {
     padding: 10px 10px 0;
-    height: calc(100% - 30px);
+    height: calc(100% - 37px);
+    line-height: 20px;
+    overflow: hidden;
 }
 .output__hiscore {
     @extend .output__win-conditions;

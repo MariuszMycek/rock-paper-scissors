@@ -149,6 +149,7 @@ body {
 }
 
 .action-field__computer .button {
+  height: 54px;
   cursor: default;
 }
 
@@ -196,6 +197,8 @@ body {
 
 .sys-messages__text, .hiscore__text {
   padding: 10px 10px 0;
-  height: calc(100% - 30px);
+  height: calc(100% - 37px);
+  line-height: 20px;
+  overflow: hidden;
 }
 /*# sourceMappingURL=style.css.map */

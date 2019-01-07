@@ -15,41 +15,39 @@
                 <div class="score-board__header">Rounds won in this match</div>
                 <div class="score-board__score">Player</div>
                 <div class="score-board__score">Computer</div>
-                <div class="score-board__won-rounds">4</div>
-                <div class="score-board__won-rounds">3</div>
+                <div class="score-board__won-rounds" id="playerScore">0</div>
+                <div class="score-board__won-rounds" id="cpuScore">0</div>
             </div>
         </div>
         <div class="container action-field">
-            <div class="action-field__player">
+            <div class="action-field__player" id="actionField">
                 Click the button below
-                <button type="button" class="button">
+                <button type="button" class="button" id="rock">
                     Rock
                 </button>
-                <button type="button" class="button">
+                <button type="button" class="button" id="paper">
                     Paper
                 </button>
-                <button type="button" class="button">
+                <button type="button" class="button" id="scissors">
                     Scissors
                 </button>
             </div>
             <div class="action-field__computer">
-                <button type="button" class="button">
-                    Rock
-                </button>
+                <button type="button" class="button"></button>
             </div>
         </div>
         <div class="container output">
             <div class="output__win-conditions">
-                <h1>Rounds needeed to win:</h1>
-                <div class="win-conditions__rounds">4</div>
+                <h1>Rounds needed to win:</h1>
+                <div class="win-conditions__rounds"></div>
             </div>
             <div class="output__sys-messages">
                 <h1>System messages:</h1>
-                <div class="sys-messages__text">dfg</div>
+                <div class="sys-messages__text" id="outputMessages"></div>
             </div>
             <div class="output__hiscore">
                 <h1>Highscore:</h1>
-                <div class="hiscore__text">dfg</div>
+                <div class="hiscore__text"></div>
             </div>
         </div>
 
