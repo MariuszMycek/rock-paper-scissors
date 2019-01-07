@@ -7,6 +7,52 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
-      <script src="js/script.js"></script>  
+        <div class="container">
+            <div class="header">
+                <button type="button" class="button">New game</button>
+            </div>
+            <div class="score-board">
+                <div class="score-board__header">Rounds won in this match</div>
+                <div class="score-board__score">Player</div>
+                <div class="score-board__score">Computer</div>
+                <div class="score-board__won-rounds">4</div>
+                <div class="score-board__won-rounds">3</div>
+            </div>
+        </div>
+        <div class="container action-field">
+            <div class="action-field__player">
+                Click the button below
+                <button type="button" class="button">
+                    Rock
+                </button>
+                <button type="button" class="button">
+                    Paper
+                </button>
+                <button type="button" class="button">
+                    Scissors
+                </button>
+            </div>
+            <div class="action-field__computer">
+                <button type="button" class="button">
+                    Rock
+                </button>
+            </div>
+        </div>
+        <div class="container output">
+            <div class="output__win-conditions">
+                <h1>Rounds needeed to win:</h1>
+                <div class="win-conditions__rounds">4</div>
+            </div>
+            <div class="output__sys-messages">
+                <h1>System messages:</h1>
+                <div class="sys-messages__text">dfg</div>
+            </div>
+            <div class="output__hiscore">
+                <h1>Highscore:</h1>
+                <div class="hiscore__text">dfg</div>
+            </div>
+        </div>
+
+        <script src="js/script.js"></script>
     </body>
 </html>

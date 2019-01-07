@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900");
+
+@import "reset";
+$bgcolor: #2c3e50;
+$fontcolor: #e67e22;
+$border: 2px solid $fontcolor;
+
+body {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    background-color: $bgcolor;
+    box-sizing: border-box;
+    color: $fontcolor;
+    margin-top: 20px;
+}
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    border-left: $border;
+    border-right: $border;
+}
+.button {
+    background-color: $bgcolor;
+    outline: none;
+    border: $border;
+    color: $fontcolor;
+    font-size: 20px;
+    width: 150px;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+    &:hover {
+        background-color: lighten($bgcolor, 10);
+    }
+}
+.header {
+    width: 100%;
+    padding: 30px 0;
+    border-top: $border;
+    border-bottom: $border;
+}
+.score-board {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 24px;
+    padding: 30px 0;
+}
+.score-board__header {
+    width: 100%;
+    padding: 5px 0;
+}
+.score-board__score {
+    width: 50%;
+    padding: 5px 0;
+}
+.score-board__won-rounds {
+    width: 50%;
+    padding: 5px 0;
+}
+
+.action-field {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-bottom: $border;
+}
+.action-field__player {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.action-field__computer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button {
+        cursor: default;
+        &:hover {
+            background-color: $bgcolor;
+        }
+    }
+}
+.output {
+    height: 200px;
+    border-bottom: $border;
+    display: flex;
+    justify-content: center;
+     > div h1 {
+        border-bottom: $border;
+        padding-bottom: 10px;
+        height: 18px;
+    }
+}
+.output__win-conditions {
+    padding: 10px 0;
+    height: calc(100% - 20px);
+    width: 25%;
+}
+.win-conditions__rounds {
+    display: flex;
+    font-size: 52px;
+    justify-content: center;
+    padding-top: 30px;
+}
+.output__sys-messages {
+    padding: 10px 0;
+    height: calc(100% - 20px);
+    width: calc(50% - 4px);
+    border-left: $border;
+    border-right: $border;
+}
+.sys-messages__text {
+    padding: 10px 10px 0;
+    height: calc(100% - 30px);
+}
+.output__hiscore {
+    @extend .output__win-conditions;
+}
+.hiscore__text {
+    @extend .sys-messages__text;
+}
