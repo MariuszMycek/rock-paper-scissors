@@ -9,7 +9,9 @@
     <body>
         <div class="container">
             <div class="header">
-                <button type="button" class="button">New game</button>
+                <button type="button" class="button" id="newGameButton"
+                    >New game</button
+                >
             </div>
             <div class="score-board">
                 <div class="score-board__header">Rounds won in this match</div>
@@ -20,37 +22,38 @@
             </div>
         </div>
         <div class="container action-field">
-            <div class="action-field__player" id="actionField">
-                Click the button below
-                <button type="button" class="button" id="rock">
-                    Rock
-                </button>
-                <button type="button" class="button" id="paper">
-                    Paper
-                </button>
-                <button type="button" class="button" id="scissors">
-                    Scissors
-                </button>
+            <div class="action-field__player invisible" id="actionFieldPlayer"
+                >Click the button below<button
+                    type="button"
+                    class="button"
+                    id="rock"
+                    >Rock</button
+                >
+                <button type="button" class="button" id="paper">Paper</button>
+                <button type="button" class="button" id="scissors"
+                    >Scissors</button
+                >
             </div>
-            <div class="action-field__computer">
+            <div class="action-field__computer invisible" id="actionFieldCpu">
                 <button type="button" class="button"></button>
             </div>
         </div>
         <div class="container output">
             <div class="output__win-conditions">
-                <h1>Rounds needed to win:</h1>
-                <div class="win-conditions__rounds"></div>
+                <h1>Won rounds required to win:</h1>
+                <div class="win-conditions__rounds" id="roundsToWin">-</div>
             </div>
             <div class="output__sys-messages">
                 <h1>System messages:</h1>
-                <div class="sys-messages__text" id="outputMessages"></div>
+                <div class="sys-messages__text" id="outputMessages"
+                    >Click 'New game" to start a match</div
+                >
             </div>
             <div class="output__hiscore">
-                <h1>Highscore:</h1>
-                <div class="hiscore__text"></div>
+                <h1>Matches without defeat:</h1>
+                <div class="hiscore__text" id="wonMatches">0</div>
             </div>
         </div>
-
         <script src="js/script.js"></script>
     </body>
 </html>

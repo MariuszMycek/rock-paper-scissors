@@ -24,6 +24,7 @@ body {
     border-right: $border;
 }
 .button {
+    user-select: none;
     background-color: $bgcolor;
     outline: none;
     border: $border;
@@ -38,6 +39,9 @@ body {
     &:hover {
         background-color: lighten($bgcolor, 10);
     }
+}
+.invisible {
+    visibility: hidden;
 }
 .header {
     width: 100%;
@@ -128,5 +132,5 @@ body {
     @extend .output__win-conditions;
 }
 .hiscore__text {
-    @extend .sys-messages__text;
+    @extend .win-conditions__rounds;
 }
