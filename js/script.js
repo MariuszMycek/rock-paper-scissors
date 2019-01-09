@@ -13,6 +13,7 @@ const cpuScore = document.getElementById("cpuScore");
 let victories = 0;
 let playerPoints = 0;
 let cpuPoints = 0;
+let rounds;
 const score = function(point, action) {
     if (action == 1 && point == 2) {
         cpuPoints += 1;
@@ -36,7 +37,7 @@ const resetScores = function() {
     wonMatches.innerHTML = victories;
 };
 const newGame = function() {
-    const rounds = window.prompt(
+    rounds = window.prompt(
         "How many won rounds are required to win entire match?"
     );
     actionFieldPlayer.classList.add("invisible");
