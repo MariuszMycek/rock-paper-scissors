@@ -29,7 +29,8 @@ const score = function(point, action) {
 const resetScores = function() {
     actionFieldPlayer.classList.remove("invisible");
     actionFieldCpu.classList.remove("invisible");
-    outputMessages.innerHTML = "New game - rounds required to win: " + roundsToWin.innerHTML;
+    outputMessages.innerHTML =
+        "New game - rounds required to win: " + roundsToWin.innerHTML;
     if (cpuPoints > 0 || playerPoints > 0) {
         victories = 0;
     }
@@ -55,103 +56,69 @@ const newGame = function() {
         resetScores();
     }
 };
+
+const ROCK = "Rock";
+const PAPER = "Paper";
+const SCISSORS = "Scissors";
+
 const winCondition = function() {
+    let message =
+        playerScore.innerHTML + " - " + cpuScore.innerHTML + "<br><br>";
+
     if (cpuPoints == rounds) {
-        outputMessages.innerHTML =
-            playerScore.innerHTML +
-            " - " +
-            cpuScore.innerHTML +
-            "<br>" +
-            "Game over - you lost. Click 'New game' to start next match";
-        actionFieldPlayer.classList.add("invisible");
-        actionFieldCpu.classList.add("invisible");
+        message += "Game over - you lost. Click 'New game' to start next match";
         victories = 0;
-        score(0, 0);
     } else if (playerPoints == rounds) {
-        outputMessages.innerHTML =
-            playerScore.innerHTML +
-            " - " +
-            cpuScore.innerHTML +
-            "<br>" +
-            "YOU WON ENTIRE GAME! Click 'New game' to start next match";
-        actionFieldPlayer.classList.add("invisible");
-        actionFieldCpu.classList.add("invisible");
-        score(0, 0);
+        message += "YOU WON ENTIRE GAME! Click 'New game' to start next match";
         victories += 1;
     }
+
+    if (cpuPoints == rounds || playerPoints == rounds) {
+        score(0, 0);
+        outputMessages.innerHTML = message;
+        actionFieldPlayer.classList.add("invisible");
+        actionFieldCpu.classList.add("invisible");
+    }
+
     wonMatches.innerHTML = victories;
 };
-const moveNumber = function(number) {
-    if (number == 1) {
-        return "Rock";
-    } else if (number == 2) {
-        return "Paper";
-    } else if (number == 3) {
-        return "Scissors";
-    }
-};
+
 const playerMove = function(move) {
     const cpuButton = document.querySelector(".action-field__computer button");
-    const number = Math.floor(Math.random() * 3 + 1);
-    cpuButton.innerHTML = moveNumber(number);
+    const randomNumber = Math.floor(Math.random() * 3); // pick 0, 1, or 2
+    const pcMove = [ROCK, PAPER, SCISSORS][randomNumber];
+
+    cpuButton.innerHTML = pcMove;
+
+    let message = "You played " + move + " - Computer played " + pcMove;
+
     if (
-        (move == 1 && number == 2) ||
-        (move == 2 && number == 3) ||
-        (move == 3 && number == 1)
+        (move == ROCK && pcMove == PAPER) ||
+        (move == PAPER && pcMove == SCISSORS) ||
+        (move == SCISSORS && pcMove == ROCK)
     ) {
+        message += ". Computer scores a point." + "<br>";
         score(2, 1);
-        outputMessages.insertAdjacentHTML(
-            "afterbegin",
-            "You played " +
-                moveNumber(move) +
-                " - Computer played " +
-                cpuButton.innerHTML +
-                ". Computer scores a point." +
-                "<br>"
-        );
-        winCondition();
-    } else if (
-        (move == 1 && number == 3) ||
-        (move == 2 && number == 1) ||
-        (move == 3 && number == 2)
-    ) {
+    } else if (move == pcMove) {
+        message += ". Draw." + "<br>";
+    } else {
+        message += ". You score a point." + "<br>";
         score(1, 1);
-        outputMessages.insertAdjacentHTML(
-            "afterbegin",
-            "You played " +
-                moveNumber(move) +
-                " - Computer played " +
-                cpuButton.innerHTML +
-                ". You score a point." +
-                "<br>"
-        );
-        winCondition();
-    } else if (
-        (move == 1 && number == 1) ||
-        (move == 2 && number == 2) ||
-        (move == 3 && number == 3)
-    ) {
-        outputMessages.insertAdjacentHTML(
-            "afterbegin",
-            "You played " +
-                moveNumber(move) +
-                " - Computer played " +
-                cpuButton.innerHTML +
-                ". Draw." +
-                "<br>"
-        );
-        winCondition();
     }
+
+    outputMessages.insertAdjacentHTML("afterbegin", message);
+
+    winCondition();
 };
 
 newGameButton.addEventListener("click", newGame);
 
 rock.addEventListener("click", function() {
-    playerMove(1);
+    playerMove(ROCK);
 });
 paper.addEventListener("click", function() {
-    playerMove(2);
+    playerMove(PAPER);
 });
 scissors.addEventListener("click", function() {
-    playerMove(3);
+    playerMove(SCISSORS);
 });
