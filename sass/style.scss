@@ -1,10 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900");
-
 @import "reset";
 $bgcolor: #2c3e50;
 $fontcolor: #e67e22;
 $border: 2px solid $fontcolor;
-
 body {
     font-family: "Raleway", sans-serif;
     text-align: center;
@@ -13,16 +11,19 @@ body {
     color: $fontcolor;
     margin-top: 20px;
 }
+
 .container {
     display: flex;
     width: 100%;
     max-width: 1200px;
+    min-width: 810px;
     justify-content: center;
     margin: 0 auto;
     flex-wrap: wrap;
     border-left: $border;
     border-right: $border;
 }
+
 .button {
     user-select: none;
     background-color: $bgcolor;
@@ -30,25 +31,73 @@ body {
     border: $border;
     color: $fontcolor;
     font-size: 20px;
-    width: 150px;
     padding: 15px;
-    margin: 10px 0;
+    margin: 10px;
     border-radius: 5px;
     cursor: pointer;
+    width: 65px;
+    height: 65px;
     transition: all 0.1s ease-out;
     &:hover {
         background-color: lighten($bgcolor, 10);
     }
 }
+
+.button--new-game {
+    width: 150px;
+}
+
+.button--game-rules {
+    @extend .button--new-game;
+}
+
+.button__icon {
+    font-size: 30px;
+}
+
+.button__icon--rock {
+    transform: rotateZ(90deg);
+}
+
+.button__icon--paper {
+    transform: rotateZ(90deg);
+}
+
+.button__icon--scissors {
+    transform: rotateY(180deg);
+}
+
+.button__icon--lizard {
+    transform: rotateY(180deg);
+}
+
+.button__icon--spock {
+    transform: rotateZ(90deg);
+}
+
+.button__cpu-icon--rock {
+    transform: rotateZ(270deg) rotateY(180deg);
+}
+
+.button__cpu-icon--paper {
+    transform: rotateZ(270deg) rotateY(180deg);
+}
+
+.button__cpu-icon--spock {
+    transform: rotateZ(270deg) rotateY(180deg);
+}
+
 .invisible {
     visibility: hidden;
 }
+
 .header {
     width: 100%;
     padding: 30px 0;
     border-top: $border;
     border-bottom: $border;
 }
+
 .score-board {
     width: 100%;
     display: flex;
@@ -56,43 +105,48 @@ body {
     font-size: 24px;
     padding: 30px 0;
 }
+
 .score-board__header {
     width: 100%;
-    padding: 5px 0;
+    padding-bottom: 15px;
 }
+
 .score-board__score {
     width: 50%;
     padding: 5px 0;
 }
+
 .score-board__won-rounds {
     width: 50%;
     padding: 5px 0;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .action-field {
-    padding-top: 30px;
     padding-bottom: 20px;
     border-bottom: $border;
 }
+
 .action-field__player {
     width: 50%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
+
 .action-field__computer {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     .button {
-        height: 54px;
         cursor: default;
         &:hover {
             background-color: $bgcolor;
         }
     }
 }
+
 .output {
     height: 200px;
     border-bottom: $border;
@@ -104,17 +158,20 @@ body {
         height: 18px;
     }
 }
+
 .output__win-conditions {
     padding: 10px 0;
     height: calc(100% - 20px);
     width: 25%;
 }
+
 .win-conditions__rounds {
     display: flex;
     font-size: 52px;
     justify-content: center;
     padding-top: 30px;
 }
+
 .output__sys-messages {
     padding: 10px 0;
     height: calc(100% - 20px);
@@ -122,15 +179,198 @@ body {
     border-left: $border;
     border-right: $border;
 }
+
 .sys-messages__text {
     padding: 10px 10px 0;
     height: calc(100% - 37px);
     line-height: 20px;
     overflow: hidden;
 }
+
 .output__hiscore {
     @extend .output__win-conditions;
 }
+
 .hiscore__text {
     @extend .win-conditions__rounds;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    &.show {
+        display: block;
+    }
+}
+
+.modal {
+    display: none;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    border: 2px solid $fontcolor;
+    border-radius: 5px;
+    &.show {
+        display: block;
+    }
+}
+
+.modal__close {
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    line-height: 23px;
+    position: absolute;
+    right: -11px;
+    top: -11px;
+    padding: 0;
+    border-radius: 50%;
+    background: $bgcolor;
+    color: $fontcolor;
+    border: 2px solid $fontcolor;
+    text-decoration: none;
+    &:hover {
+        background: lighten($color: $bgcolor, $amount: 10);
+    }
+}
+
+.modal__header {
+    padding: 40px 30px 20px;
+    min-height: 30px;
+    line-height: 1.5em;
+    font-weight: bold;
+}
+
+.modal__table {
+    width: 850px;
+    margin: 25px;
+    border: $border;
+}
+
+.table__table-header {
+    width: 100%;
+    border-bottom: $border;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-around;
+    color: $bgcolor;
+}
+
+.table-header__rounds {
+    width: 10%;
+}
+
+.table-header__player-moves {
+    width: 80%;
+}
+
+.table-header__result {
+    width: 10%;
+}
+
+.table__table-content {
+    @extend .table__table-header;
+    border: none;
+    max-height: 350px;
+    overflow: auto;
+}
+
+.table-content__column {
+    div {
+        padding: 3px 0;
+    }
+    div:nth-child(even) {
+        background: rgba($bgcolor, 0.25);
+        color: $fontcolor;
+    }
+}
+
+.table-content__column--rounds {
+    @extend .table-header__rounds;
+}
+
+.table-content__column--player-moves {
+    @extend .table-header__player-moves;
+}
+
+.table-content__column--result {
+    @extend .table-header__result;
+}
+
+.modal-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.modal__label {
+    display: block;
+    padding: 7px 0;
+    font-size: 0.9em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.modal__input {
+    display: block;
+    padding: 3px;
+    width: 250px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    outline: none;
+    &:focus {
+        box-shadow: 0 0 5px 0 $bgcolor;
+    }
+}
+
+.modal__button {
+    display: block;
+    align-self: flex-end;
+    outline: none;
+    background: $bgcolor;
+    border: $border;
+    border-radius: 5px;
+    color: $fontcolor;
+    padding: 5px 10px;
+    font-size: 100%;
+    cursor: pointer;
+    &:hover {
+        background: lighten($color: $bgcolor, $amount: 10);
+    }
+    &:disabled {
+        background: lighten($color: $bgcolor, $amount: 50);
+        border-color: lighten($color: $fontcolor, $amount: 30);
+        color: lighten($color: $fontcolor, $amount: 30);
+    }
+}
+
+.game-rules {
+    line-height: 1.4;
+    max-width: 645px;
+}
+
+.game-rules__content {
+    padding: 20px 49px;
+    text-align: justify;
+}
+
+.game-rules__list {
+    padding: 20px;
+    line-height: 1.8;
 }

@@ -1,59 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Project 8.4</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <button type="button" class="button" id="newGameButton"
-                    >New game</button
-                >
-            </div>
-            <div class="score-board">
-                <div class="score-board__header">Rounds won in this match</div>
-                <div class="score-board__score">Player</div>
-                <div class="score-board__score">Computer</div>
-                <div class="score-board__won-rounds" id="playerScore">0</div>
-                <div class="score-board__won-rounds" id="cpuScore">0</div>
-            </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Rock - Paper - Scissors - Lizard - Spock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header buttons -->
+
+      <div class="header">
+        <button
+          type="button"
+          class="button button--new-game"
+          id="newGameButton"
+        >
+          New game
+        </button>
+        <button type="button" class="button button--game-rules" id="game-rules">
+          Game rules
+        </button>
+      </div>
+      <!-- Score board -->
+      <div class="score-board">
+        <div class="score-board__header">
+          Rock - Paper - Scissors - Lizard - Spock
         </div>
-        <div class="container action-field">
-            <div class="action-field__player invisible" id="actionFieldPlayer"
-                >Click the button below<button
-                    type="button"
-                    class="button"
-                    id="rock"
-                    >Rock</button
-                >
-                <button type="button" class="button" id="paper">Paper</button>
-                <button type="button" class="button" id="scissors"
-                    >Scissors</button
-                >
-            </div>
-            <div class="action-field__computer invisible" id="actionFieldCpu">
-                <button type="button" class="button"></button>
-            </div>
+        <div class="score-board__score" id="score-board-player-name">
+          Player
         </div>
-        <div class="container output">
-            <div class="output__win-conditions">
-                <h1>Won rounds required to win:</h1>
-                <div class="win-conditions__rounds" id="roundsToWin">-</div>
-            </div>
-            <div class="output__sys-messages">
-                <h1>System messages:</h1>
-                <div class="sys-messages__text" id="outputMessages"
-                    >Click 'New game" to start a match</div
-                >
-            </div>
-            <div class="output__hiscore">
-                <h1>Matches without defeat:</h1>
-                <div class="hiscore__text" id="wonMatches">0</div>
-            </div>
+        <div class="score-board__score">Computer</div>
+        <div class="score-board__won-rounds" id="playerScore">0</div>
+        <div class="score-board__won-rounds" id="cpuScore">0</div>
+      </div>
+    </div>
+    <div class="container action-field">
+      <!-- Field with player buttons -->
+
+      <div class="action-field__player invisible" id="actionFieldPlayer">
+        <button
+          type="button"
+          class="button player-move"
+          id="rock"
+          data-move="Rock"
+        >
+          <i class="far fa-hand-rock button__icon button__icon--rock"></i>
+        </button>
+        <button
+          type="button"
+          class="button player-move"
+          id="paper"
+          data-move="Paper"
+        >
+          <i class="far fa-hand-paper button__icon button__icon--paper"></i>
+        </button>
+        <button
+          type="button"
+          class="button player-move"
+          id="scissors"
+          data-move="Scissors"
+        >
+          <i
+            class="far fa-hand-scissors button__icon button__icon--scissors"
+          ></i>
+        </button>
+        <button
+          type="button"
+          class="button player-move"
+          id="lizard"
+          data-move="Lizard"
+        >
+          <i class="far fa-hand-lizard button__icon button__icon--lizard"></i>
+        </button>
+        <button
+          type="button"
+          class="button player-move"
+          id="spock"
+          data-move="Spock"
+        >
+          <i class="far fa-hand-spock button__icon button__icon--spock"></i>
+        </button>
+      </div>
+
+      <!-- Field with Cpu move -->
+
+      <div class="action-field__computer invisible" id="actionFieldCpu">
+        <button type="button" class="button" id="cpu-move">
+          <i class="far button__icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Field with system messages -->
+    <div class="container output">
+      <div class="output__win-conditions">
+        <h1>Won rounds required to win:</h1>
+        <div class="win-conditions__rounds" id="roundsToWin">-</div>
+      </div>
+      <div class="output__sys-messages">
+        <h1>System messages:</h1>
+        <div class="sys-messages__text" id="outputMessages">
+          Click 'New game" to start a match
         </div>
-        <script src="js/script.js"></script>
-    </body>
+      </div>
+      <div class="output__hiscore">
+        <h1>Matches without defeat:</h1>
+        <div class="hiscore__text" id="wonMatches">0</div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+
+    <div class="overlay" id="modal-overlay">
+      <!-- Match end modal -->
+
+      <div class="modal" id="match-end-modal">
+        <a href="#" class="modal__close">x</a>
+        <div class="modal__header"></div>
+        <div class="modal__table">
+          <div class="table__table-header">
+            <div class="table-header__rounds">Round</div>
+            <div class="table-header__player-moves">
+              Players moves
+            </div>
+            <div class="table-header__result">Result</div>
+          </div>
+          <div class="table__table-content">
+            <div
+              class="table-content__column table-content__column--rounds"
+            ></div>
+            <div
+              class="table-content__column table-content__column--player-moves"
+            ></div>
+            <div
+              class="table-content__column table-content__column--result"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game rules modal -->
+
+      <div class="modal" id="game-rules-modal">
+        <a href="#" class="modal__close">x</a>
+        <div class="modal__header">Game rules</div>
+        <div class="game-rules">
+          <p class="game-rules__content">
+            The game is an expansion on the game Rock, Paper, Scissors. Each
+            player picks a variable and reveals it at the same time. The winner
+            is the one who defeats the others. In a tie, the process is repeated
+            until a winner is found.
+          </p>
+          <ul class="game-rules__list">
+            <li>
+              Scissors
+              <i class="far fa-hand-scissors button__icon--scissors"></i> cuts
+              Paper
+              <i class="far fa-hand-paper button__icon--paper"></i>
+            </li>
+            <li>
+              Paper <i class="far fa-hand-paper button__icon--paper"></i> covers
+              Rock <i class="far fa-hand-rock button__icon--rock"></i>
+            </li>
+            <li>
+              Rock <i class="far fa-hand-rock button__icon--rock"></i> crushes
+              Lizard
+              <i class="far fa-hand-lizard button__icon--lizard"></i>
+            </li>
+            <li>
+              Lizard
+              <i class="far fa-hand-lizard button__icon--lizard"></i> poisons
+              Spock
+              <i class="far fa-hand-spock button__icon--spock"></i>
+            </li>
+            <li>
+              Spock
+              <i class="far fa-hand-spock button__icon--spock"></i> smashes
+              Scissors
+              <i class="far fa-hand-scissors button__icon--scissors"></i>
+            </li>
+            <li>
+              Scissors
+              <i class="far fa-hand-scissors button__icon--scissors"></i>
+              decapitates Lizard
+              <i class="far fa-hand-lizard button__icon--lizard"></i>
+            </li>
+            <li>
+              Lizard
+              <i class="far fa-hand-lizard button__icon--lizard"></i> eats Paper
+              <i class="far fa-hand-paper button__icon--paper"></i>
+            </li>
+            <li>
+              Paper
+              <i class="far fa-hand-paper button__icon--paper"></i> disproves
+              Spock <i class="far fa-hand-spock button__icon--spock"></i>
+            </li>
+            <li>
+              Spock
+              <i class="far fa-hand-spock button__icon--spock"></i> vaporizes
+              Rock <i class="far fa-hand-rock button__icon--rock"></i>
+            </li>
+            <li>
+              (and as it always has) Rock
+              <i class="far fa-hand-rock button__icon--rock"></i> crushes
+              Scissors
+              <i class="far fa-hand-scissors button__icon--scissors"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Match start modal -->
+
+      <div class="modal" id="match-start-modal">
+        <a href="#" class="modal__close">x</a>
+        <div class="modal-form-wrapper">
+          <label class="modal__label">Player name:</label>
+          <input
+            type="text"
+            id="player-name"
+            class="modal__input"
+            maxlength="10"
+            placeholder="Max 10 characters"
+            required
+            autofocus
+          />
+          <label class="modal__label">Rounds required to win:</label>
+          <input
+            type="number"
+            id="rounds-number"
+            class="modal__input"
+            min="1"
+            max="10"
+            step="1"
+            placeholder="Max 10 rounds"
+            required
+          />
+          <button
+            type="button"
+            class="modal__button"
+            id="start-button"
+            disabled
+          >
+            Start
+          </button>
+        </div>
+      </div>
+    </div>
+    <script defer src="js/script.js"></script>
+  </body>
 </html>
